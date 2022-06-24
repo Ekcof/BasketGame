@@ -14,7 +14,6 @@ public class HandledObject : MonoBehaviour
     {
         if (!isHandled && handledObject!=null)
         {
-            Debug.Log("korabl");
             handledObject.transform.position = Vector3.Lerp(handledObject.transform.position, transform.position, handleSpeed * Time.deltaTime);
             if (Vector3.Distance(handledObject.transform.position, transform.position) < epsilon) isHandled = true; 
         }
@@ -55,6 +54,7 @@ public class HandledObject : MonoBehaviour
         UnfreezeObject();
         rigidbody.AddForce(Camera.main.transform.forward * strength, ForceMode.Impulse);
         rigidbody = null;
+
     }
     
     /// <summary>
@@ -74,5 +74,10 @@ public class HandledObject : MonoBehaviour
         handledObject.transform.parent = null;
         rigidbody.constraints = RigidbodyConstraints.None;
         handledObject = null;
+    }
+
+    public Rigidbody GetRigidBody()
+    {
+        return rigidbody;
     }
 }
