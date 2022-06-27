@@ -56,8 +56,10 @@
     <Compile Include="Assets\Scripts\DrawTrajectory.cs" />
     <Compile Include="Assets\Scripts\HandledObject.cs" />
     <Compile Include="Assets\Scripts\SubmitController.cs" />
-    <Compile Include="Assets\Scripts\SC_FPSController.cs" />
     <Compile Include="Assets\Scripts\SoundHitScript.cs" />
+    <Compile Include="Assets\Scripts\SC_FPSController.cs" />
+    <Compile Include="Assets\BasketBallRingScript.cs" />
+    <Compile Include="Assets\RingTriggerScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

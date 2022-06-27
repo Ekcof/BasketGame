@@ -14,20 +14,17 @@ public class SubmitController : MonoBehaviour
     private Ray ray;
     private HandledObject handledObject;
     private float strength;
-    private DrawTrajectory drawTrajectory;
     private Rigidbody rb;
 
     private void Awake()
     {
         strength = minStrength;
         handledObject = holdPosition.GetComponent<HandledObject>();
-        drawTrajectory = holdPosition.GetComponent<DrawTrajectory>();
     }
 
     private void Update()
     {
-        ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        Physics.Raycast(ray, out hit, takeBallDistance);
+        // Check if there is an existing object has been taken
         if (handledObject.IsHandled || handledObject.IsDraging)
         {
             if (handledObject.IsHandled && rb!=null)
@@ -42,7 +39,8 @@ public class SubmitController : MonoBehaviour
         else
         {
             ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-            Physics.Raycast(ray, out hit, takeBallDistance);
+            bool sphereCast = Physics.SphereCast(ray.origin, 0.3f, ray.direction, out hit, takeBallDistance, layerMask);
+            if (hit.transform != null) Debug.Log(hit.transform.name);
             rb = null;
             if (hit.transform != null) rb = hit.transform.GetComponent<Rigidbody>();
 
@@ -56,24 +54,20 @@ public class SubmitController : MonoBehaviour
             }
         }
 
-
+        // Get the scroll to change the trajectory of throw
         if (Input.GetAxis("Mouse ScrollWheel") != 0)
         {
             timeElapsed += (Input.GetAxis("Mouse ScrollWheel") * speed);
             if (timeElapsed < 0) { timeElapsed = 0; }
         }
-        Debug.Log(Input.GetAxis("Mouse ScrollWheel"));
 
+        //Get the F button to drop the object
         if (Input.GetKeyDown(KeyCode.F))
         {
             handledObject.ReleaseObject();
         }
 
-        /*       if (Input.GetMouseButton(1))
-               {
-                   timeElapsed += (Time.deltaTime*speed);
-               }
-               */
+        //Get the right click to throw the object
         if (Input.GetMouseButtonUp(1))
         {
             if (handledObject.IsHandled)

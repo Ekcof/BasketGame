@@ -21,6 +21,7 @@ public class SoundHitScript : MonoBehaviour
     // Update is called once per frame
     private void OnCollisionEnter(Collision collision)
     {
+        // TODO: Avoid reverse counting if player throw ball from beneath
         if (rigidbody != null)
         {
             speed = rigidbody.velocity.magnitude;
