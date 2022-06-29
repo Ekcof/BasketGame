@@ -53,10 +53,16 @@
     <UnityVersion>2020.3.23f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\ResetRingPassScript.cs" />
+    <Compile Include="Assets\Scripts\DrawTrajectory.cs" />
     <Compile Include="Assets\Scripts\HandledObject.cs" />
     <Compile Include="Assets\Scripts\SubmitController.cs" />
+    <Compile Include="Assets\Scripts\RingTriggerScript.cs" />
+    <Compile Include="Assets\Scripts\SoundHitScript.cs" />
+    <Compile Include="Assets\Scripts\BasketBallRingScript.cs" />
     <Compile Include="Assets\Scripts\SC_FPSController.cs" />
-    <Compile Include="Assets\Scripts\DrawTrajectory.cs" />
+    <Compile Include="Assets\Scripts\BallRespawnScript.cs" />
+    <Compile Include="Assets\Scripts\ObstacleScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

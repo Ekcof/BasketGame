@@ -7,15 +7,22 @@ public class HandledObject : MonoBehaviour
     [SerializeField] private float handleSpeed = 2.0f;
     [SerializeField] private float epsilon = 0.005f;
     [SerializeField] private GameObject handledObject;
-    private Rigidbody rigidbody;
+    private Rigidbody rigidBody;
     private bool isHandled;
+    private bool isDraging;
+
+    //TODO: Drop handled object if there is collision
 
     private void Update()
     {
-        if (!isHandled && handledObject!=null)
+        if (!isHandled && handledObject != null)
         {
             handledObject.transform.position = Vector3.Lerp(handledObject.transform.position, transform.position, handleSpeed * Time.deltaTime);
-            if (Vector3.Distance(handledObject.transform.position, transform.position) < epsilon) isHandled = true; 
+            if (Vector3.Distance(handledObject.transform.position, transform.position) < epsilon)
+            {
+                isHandled = true;
+                isDraging = false;
+            }
         }
     }
 
@@ -27,8 +34,8 @@ public class HandledObject : MonoBehaviour
     {
         handledObject = newHandledObject;
         handledObject.transform.SetParent(transform);
-        rigidbody = newHandledObject.GetComponent<Rigidbody>();
-        rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+        rigidBody = newHandledObject.GetComponent<Rigidbody>();
+        rigidBody.constraints = RigidbodyConstraints.FreezeAll;
     }
 
     /// <summary>
@@ -36,11 +43,11 @@ public class HandledObject : MonoBehaviour
     /// </summary>
     public void ReleaseObject()
     {
-        if(isHandled && handledObject != null && rigidbody != null)
+        if (isHandled && handledObject != null && rigidBody != null)
         {
             isHandled = false;
             UnfreezeObject();
-            rigidbody = null;
+            rigidBody = null;
         }
     }
 
@@ -48,36 +55,49 @@ public class HandledObject : MonoBehaviour
     /// Throw the handled object
     /// </summary>
     /// <param name="strength">strength of a throw</param>
-    public void ThrowObject(float strength)
+    public void ThrowObject(Vector3 vectorThrow)
     {
-        isHandled = false;
         UnfreezeObject();
-        rigidbody.AddForce(Camera.main.transform.forward * strength, ForceMode.Impulse);
-        rigidbody = null;
+        rigidBody.AddForce(vectorThrow, ForceMode.Impulse);
+        rigidBody = null;
 
     }
-    
+
     /// <summary>
     /// Get if the object is handled
     /// </summary>
     /// <returns></returns>
-    public bool GetHandled()
+    public bool IsHandled
     {
-        return isHandled;
+        get { return isHandled; }
+        set { isHandled = value; }
+    }
+
+    /// <summary>
+    /// Get the rigidBody of handled object
+    /// </summary>
+    /// <returns></returns>
+    public Rigidbody GetRigidBody()
+    {
+        return rigidBody;
+    }
+
+    public bool IsDraging
+    {
+        get { return isDraging; }
+        set { isDraging = value; }
     }
 
     /// <summary>
     /// Unfreeze constraints and unparent of rigidbody of the object
     /// </summary>
-    private void UnfreezeObject()
+    public void UnfreezeObject()
     {
+        isHandled = false;
+        isDraging = false;
         handledObject.transform.parent = null;
-        rigidbody.constraints = RigidbodyConstraints.None;
+        rigidBody.constraints = RigidbodyConstraints.None;
         handledObject = null;
     }
 
-    public Rigidbody GetRigidBody()
-    {
-        return rigidbody;
-    }
 }
