@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ball
   - Board
+  - Ring
   layers:
   - Default
   - TransparentFX
@@ -15,7 +16,7 @@ TagManager:
   - UI
   - Ball
   - Trigger
-  - 
+  - Player
   - 
   - 
   - 

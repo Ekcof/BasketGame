@@ -7,11 +7,10 @@ public class HandledObject : MonoBehaviour
     [SerializeField] private float handleSpeed = 2.0f;
     [SerializeField] private float epsilon = 0.005f;
     [SerializeField] private GameObject handledObject;
+    [SerializeField] private GameObject line;
     private Rigidbody rigidBody;
     private bool isHandled;
     private bool isDraging;
-
-    //TODO: Drop handled object if there is collision
 
     private void Update()
     {
@@ -22,6 +21,7 @@ public class HandledObject : MonoBehaviour
             {
                 isHandled = true;
                 isDraging = false;
+                line.SetActive(true);
             }
         }
     }
@@ -82,6 +82,9 @@ public class HandledObject : MonoBehaviour
         return rigidBody;
     }
 
+    /// <summary>
+    /// Get the if the object is currently dragging by player
+    /// </summary>
     public bool IsDraging
     {
         get { return isDraging; }
@@ -93,6 +96,7 @@ public class HandledObject : MonoBehaviour
     /// </summary>
     public void UnfreezeObject()
     {
+        line.SetActive(false);
         isHandled = false;
         isDraging = false;
         handledObject.transform.parent = null;

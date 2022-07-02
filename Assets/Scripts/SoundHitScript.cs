@@ -18,7 +18,6 @@ public class SoundHitScript : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-
     private void OnCollisionEnter(Collision collision)
     {
         if (rigidBody != null)

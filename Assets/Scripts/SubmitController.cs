@@ -9,6 +9,7 @@ public class SubmitController : MonoBehaviour
     [SerializeField] private float maxStrength = 15f;
     [SerializeField] private float speed = 0.5f;
     [SerializeField] private float takeBallDistance = 10f;
+    [SerializeField] private float throwTrajectoryCoefficient = 0.005f;
     private Vector3 vectorThrow;
     private float timeElapsed;
     private Ray ray;
@@ -40,7 +41,6 @@ public class SubmitController : MonoBehaviour
         {
             ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
             bool sphereCast = Physics.SphereCast(ray.origin, 0.3f, ray.direction, out hit, takeBallDistance, layerMask);
-            if (hit.transform != null) Debug.Log(hit.transform.name);
             rb = null;
             if (hit.transform != null) rb = hit.transform.GetComponent<Rigidbody>();
 
@@ -57,9 +57,7 @@ public class SubmitController : MonoBehaviour
         // Get the scroll to change the trajectory of throw
         if (Input.GetAxis("Mouse ScrollWheel") != 0)
         {
-            timeElapsed += (Input.GetAxis("Mouse ScrollWheel") * speed);
-            if (timeElapsed < 0) { timeElapsed = 0; }
-            if (timeElapsed > 1) { timeElapsed = 1; }
+            ChangeForce(Input.GetAxis("Mouse ScrollWheel"));
         }
 
         //Get the F button to drop the object
@@ -68,15 +66,46 @@ public class SubmitController : MonoBehaviour
             handledObject.ReleaseObject();
         }
 
+        //Get the right click hold to add force for the throw
+        if (Input.GetMouseButton(1))
+        {
+            ChangeForce(throwTrajectoryCoefficient);
+        }
+
         //Get the right click to throw the object
         if (Input.GetMouseButtonUp(1))
         {
-            if (handledObject.IsHandled)
-            {
-                handledObject.ThrowObject(vectorThrow);
-            }
-            timeElapsed = 0;
-            strength = minStrength;
+            Throw();
         }
+
+        //Get the left click to throw the object
+        if (Input.GetMouseButtonDown(0))
+        {
+            Throw();
+        }
+    }
+
+    /// <summary>
+    /// Throw the object by button
+    /// </summary>
+    private void Throw()
+    {
+        if (handledObject.IsHandled)
+        {
+            handledObject.ThrowObject(vectorThrow);
+        }
+        timeElapsed = 0;
+        strength = minStrength;
+    }
+
+    /// <summary>
+    /// Change the force of the throw
+    /// </summary>
+    /// <param name="coefficient"></param>
+    private void ChangeForce(float coefficient)
+    {
+        timeElapsed += (coefficient * speed);
+        if (timeElapsed < 0) { timeElapsed = 0; }
+        if (timeElapsed > 1) { timeElapsed = 1; }
     }
 }
