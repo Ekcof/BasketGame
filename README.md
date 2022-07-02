@@ -2,7 +2,7 @@
 
 *Author: Algis 'Ekcof' Khasanov* 
 
-Telegram: @veselio
+Telegram: [@veselio](https://t.me/veselio)
 
 The game is about a ghost playing basketball. The more balls you throw in the basket, the more obstacles appear. No matter how you throw the ball over the fence, it magically appears at the spot again.
 
@@ -11,6 +11,8 @@ The game is about a ghost playing basketball. The more balls you throw in the ba
 ### 1. INSTALLATION
 1. Download this project's Unity package 'BasketGame'.
 2. Add the package in your own Unity Hub and open it.
+**OR**<br />
+Unpack the .rar file with the build and use BasketGame.exe
 
 ### CONTROLS
 
@@ -24,7 +26,8 @@ Hold the right click when you have taken the ball for accelerating the throw and
 **OR**<br />
 You can use left click for throwing and scroll to handle the trajectory<br />
 
-# Third parties
+### Third parties
+The following is a list of assets and 3d models that were created by others.
 [Russian buildings lowpoly pack](https://assetstore.unity.com/packages/3d/environments/urban/russian-buildings-lowpoly-pack-80518)
 by MadMedicSoft<br />
 [Baskeball hoop 3d model](https://free3d.com/ru/3d-model/basketball-hoop-47554.html)
