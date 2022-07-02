@@ -1,10 +1,18 @@
 # Basket Game
 
+*Author: Algis 'Ekcof' Khasanov* 
+
+Telegram: @veselio
+
 The game is about a ghost playing basketball. The more balls you throw in the basket, the more obstacles appear. No matter how you throw the ball over the fence, it magically appears at the spot again.
 
 ![Trading Screen](https://github.com/Ekcof/BasketGame/blob/main/Assets/Textures/Screen01.JPG)
 
-### Controls
+### 1. INSTALLATION
+1. Download this project's Unity package 'BasketGame'.
+2. Add the package in your own Unity Hub and open it.
+
+### CONTROLS
 
 :video_game: **WSAD** is for moving<br />
 :video_game: **Space** is for jumping<br />
@@ -12,7 +20,7 @@ The game is about a ghost playing basketball. The more balls you throw in the ba
 :video_game: **E** is for picking up the ball<br />
 :video_game: **F** is for dropping the ball<br />
 
-Hold the right click when you have taken the ball for accelerating the throw and the release it for the throw itself<br />
+Hold the right click when you have taken the ball for accelerating the throw and then release it for the throw itself<br />
 **OR**<br />
 You can use left click for throwing and scroll to handle the trajectory<br />
 
